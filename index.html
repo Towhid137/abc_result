@@ -1,10 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
-  <title>আমার ওয়েবসাইট</title>
+  <meta charset="UTF-8">
+  <title>ABC School</title>
+  <style>
+    body {
+      font-family: 'SolaimanLipi', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      text-align: center;
+      padding: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      color: darkred;
+    }
+    .owner-info {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .profile-photo {
+      width: 120px;
+      height: 120px;
+      border: 3px solid #000;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-left: auto;
+    }
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .description {
+      background: url('images/background.jpg') no-repeat center center;
+      background-size: cover;
+      padding: 40px;
+      color: white;
+    }
+    .description p {
+      font-size: 18px;
+      line-height: 1.6;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+    }
+    .buttons button {
+      padding: 12px 25px;
+      font-size: 16px;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .buttons button:hover {
+      background-color: #005f6a;
+    }
+  </style>
 </head>
 <body>
-  <h1>স্বাগতম!</h1>
-  <p>এটা আমার GitHub ওয়েবসাইট।</p>
+
+  <div class="header">ABC স্কুল</div>
+
+  <div class="owner-info">
+    <div>
+      <p><strong>প্রতিষ্ঠাতার তথ্য:</strong></p>
+      <p>নাম: জনাব করিম উদ্দিন</p>
+      <p>ইমেইল: karim@abcschool.com</p>
+      <p>পদবি: প্রধান শিক্ষক</p>
+    </div>
+    <div class="profile-photo">
+      <img src="images/profile.jpg" alt="প্রোফাইল ছবি">
+    </div>
+  </div>
+
+  <div class="description">
+    <p><strong>বর্ণনা:</strong></p>
+    <p>ABC স্কুল একটি আধুনিক ও প্রগতিশীল শিক্ষা প্রতিষ্ঠান যা শহরের কেন্দ্রস্থলে অবস্থিত। আমরা মানসম্মত শিক্ষা দিয়ে ভবিষ্যতের নেতৃত্ব তৈরিতে কাজ করি।</p>
+    <p>স্কুলে রয়েছে ডিজিটাল ক্লাসরুম, লাইব্রেরি, খেলাধুলার সুযোগ, এবং অভিজ্ঞ শিক্ষকবৃন্দ।</p>
+    <p>আমরা সংস্কৃতি, প্রযুক্তি ও সৃজনশীলতার বিকাশে বিশ্বাস করি।</p>
+  </div>
+
+  <div class="buttons">
+    <button onclick="location.href='about.html'">About</button>
+    <button onclick="alert('যোগাযোগ নম্বর: ০১২৩৪৫৬৭৮৯\nইমেইল: abc@school.com')">Contact</button>
+    <button onclick="location.href='result.html'">Result</button>
+  </div>
+
 </body>
 </html>
