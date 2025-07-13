@@ -2,12 +2,8 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ABC School</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
     body {
       font-family: 'SolaimanLipi', sans-serif;
       margin: 0;
@@ -19,18 +15,12 @@
       font-size: 30px;
       font-weight: bold;
       color: darkred;
-      background-color: #f2f2f2;
     }
     .owner-info {
       padding: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-    }
-    .owner-info > div {
-      flex: 1 1 300px;
-      padding: 10px;
     }
     .profile-photo {
       width: 120px;
@@ -38,7 +28,7 @@
       border: 3px solid #000;
       border-radius: 50%;
       overflow: hidden;
-      margin: 10px auto;
+      margin-left: auto;
     }
     .profile-photo img {
       width: 100%;
@@ -46,7 +36,7 @@
       object-fit: cover;
     }
     .description {
-      background: url('images/background.jpg') no-repeat center center;
+      background: url('background.jpg') no-repeat center center;
       background-size: cover;
       padding: 40px;
       color: white;
@@ -60,9 +50,7 @@
     }
     .buttons {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
+      justify-content: space-around;
       padding: 20px;
     }
     .buttons button {
@@ -71,21 +59,11 @@
       background-color: #008CBA;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
-      min-width: 120px;
     }
     .buttons button:hover {
       background-color: #005f6a;
-    }
-
-    /* Mobile specific styles */
-    @media screen and (max-width: 600px) {
-      .owner-info {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
     }
   </style>
 </head>
@@ -101,13 +79,13 @@
       <p>পদবি: প্রধান শিক্ষক</p>
     </div>
     <div class="profile-photo">
-      <img src="images/profile.jpg" alt="প্রোফাইল ছবি">
+      <img src="profile.jpg" alt="প্রোফাইল ছবি">
     </div>
   </div>
 
   <div class="description">
     <p><strong>বর্ণনা:</strong></p>
-    <p>ABC স্কুল একটি আধুনিক ও প্রগতিশীল শিক্ষা প্রতিষ্ঠান যা শহরের কেন্দ্রস্থলে অবস্থিত। আমরা মানসম্মত শিক্ষা দিয়ে ভবিষ্যতের নেতৃত্ব তৈরিতে কাজ করি।</p>
+    <p>ABC স্কুল একটি আধুনিক ও প্রগতিশীল শিক্ষা প্রতিষ্ঠান যা শহরের কেন্দ্রস্থলে অবস্থিত। <br>আমরা মানসম্মত শিক্ষা দিয়ে ভবিষ্যতের নেতৃত্ব তৈরিতে কাজ করি।</p>
     <p>স্কুলে রয়েছে ডিজিটাল ক্লাসরুম, লাইব্রেরি, খেলাধুলার সুযোগ, এবং অভিজ্ঞ শিক্ষকবৃন্দ।</p>
     <p>আমরা সংস্কৃতি, প্রযুক্তি ও সৃজনশীলতার বিকাশে বিশ্বাস করি।</p>
   </div>
