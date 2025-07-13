@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Result</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: #fff;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background: #007BFF;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ABC School - Student Result</h1>
+  <table id="resultTable">
+    <thead>
+      <tr>
+        <th>Roll</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data will be inserted here -->
+    </tbody>
+  </table>
+
+  <script>
+    // Load JSON from file
+    fetch('result.json')
+      .then(response => response.json())
+      .then(data => {
+        const tbody = document.querySelector("#resultTable tbody");
+
+        data.forEach(student => {
+          const row = document.createElement("tr");
+          row.innerHTML = `<td>${student.Roll}</td><td>${student.Name}</td>`;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error("Error loading result.json:", error);
+        document.querySelector("body").innerHTML += "<p style='text-align:center;color:red;'>Could not load results.</p>";
+      });
+  </script>
+
+</body>
+</html>
