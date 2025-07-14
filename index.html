@@ -1,100 +1,192 @@
-<!DOCTYPE html>
-<html lang="bn">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ABC School</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
   <style>
-    body {
-      font-family: 'SolaimanLipi', sans-serif;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
-    .header {
-      text-align: center;
+    body {
+      font-family: Arial, sans-serif;
       padding: 20px;
-      font-size: 30px;
-      font-weight: bold;
-      color: darkred;
+      background-color: #f0f0f0;
     }
-    .owner-info {
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      border-radius: 10px;
       padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .top-section {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
-    .profile-photo {
+    .profile-pic {
       width: 120px;
       height: 120px;
-      border: 3px solid #000;
       border-radius: 50%;
-      overflow: hidden;
-      margin-left: auto;
+      background: url('profile.jpg') center/cover no-repeat;
+      border: 2px solid #444;
     }
-    .profile-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .info {
+      flex: 1;
     }
-    .description {
-      background: url('images/background.jpg') no-repeat center center;
-      background-size: cover;
-      padding: 40px;
-      color: white;
+    .info h2 {
+      margin-bottom: 10px;
     }
-    .description p {
-      font-size: 18px;
-      line-height: 1.6;
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 10px;
-      border-radius: 10px;
+    .contact-box {
+      margin-top: 10px;
+      position: relative;
     }
-    .buttons {
-      display: flex;
-      justify-content: space-around;
-      padding: 20px;
-    }
-    .buttons button {
-      padding: 12px 25px;
-      font-size: 16px;
-      background-color: #008CBA;
-      color: white;
+    .contact-button {
+      background: #444;
+      color: #fff;
+      padding: 8px 14px;
       border: none;
-      border-radius: 10px;
+      border-radius: 5px;
       cursor: pointer;
     }
-    .buttons button:hover {
-      background-color: #005f6a;
+    .contact-icons {
+      display: flex;
+      gap: 10px;
+      position: absolute;
+      left: 120px;
+      top: 0;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 5px 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transform: translateX(-150%);
+      transition: transform 0.4s ease;
+    }
+    .contact-icons.show {
+      transform: translateX(0);
+    }
+    .contact-icons a {
+      text-decoration: none;
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+    }
+    .contact-icons img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .project-section {
+      margin-top: 30px;
+    }
+    .project-section h3 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .project-columns {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .column {
+      flex: 1;
+      min-width: 250px;
+      background: #eaeaea;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    .column h4 {
+      margin-bottom: 10px;
+      border-bottom: 2px solid #aaa;
+      padding-bottom: 5px;
+    }
+    .column ul {
+      padding-left: 20px;
+    }
+    .bottom-links {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .bottom-links a {
+      display: inline-block;
+      margin: 5px;
+      padding: 10px 20px;
+      background: #444;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    @media (max-width: 600px) {
+      .top-section {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+      }
+      .profile-pic {
+        margin-bottom: 20px;
+      }
+      .contact-icons {
+        left: 0;
+        top: 40px;
+      }
     }
   </style>
 </head>
 <body>
-
-  <div class="header">ABC স্কুল</div>
-
-  <div class="owner-info">
-    <div>
-      <p><strong>প্রতিষ্ঠাতার তথ্য:</strong></p>
-      <p>নাম: জনাব করিম উদ্দিন</p>
-      <p>ইমেইল: karim@abcschool.com</p>
-      <p>পদবি: প্রধান শিক্ষক</p>
+  <div class="container">
+    <div class="top-section">
+      <div class="info">
+        <h2>Name: Md. Towhid</h2>
+        <p>Age: 20</p>
+        <p>Profession: Student (Part time programmer) </p>
+        <div class="contact-box">
+          <button class="contact-button" onclick="toggleIcons()">Contact</button>
+          <div class="contact-icons" id="contactIcons">
+            <a href="https://facebook.com" target="_blank"><img src="fb.jpg" alt="Facebook"></a>
+            <a href="https://wa.me/1234567890" target="_blank"><img src="whatsapp.jpg" alt="WhatsApp"></a>
+            <a href="mailto:someone@example.com"><img src="email.jpg" alt="Email"></a>
+          </div>
+        </div>
+      </div>
+      <div class="profile-pic"></div>
+    </div><div class="project-section">
+  <h3>Project Detail</h3>
+  <div class="project-columns">
+    <div class="column">
+      <h4>Offline Management</h4>
+      <ul>
+        <li>Project A</li>
+        <li>Project B</li>
+        <li>Project C</li>
+        <li>Project D</li>
+      </ul>
     </div>
-    <div class="profile-photo">
-      <img src="images/profile.jpg" alt="প্রোফাইল ছবি">
+    <div class="column">
+      <h4>Online Broadcast</h4>
+      <ul>
+        <li>Project E</li>
+        <li>Project F</li>
+        <li>Project G</li>
+        <li>Project H</li>
+      </ul>
     </div>
   </div>
+</div>
 
-  <div class="description">
-    <p><strong>বর্ণনা:</strong></p>
-    <p>ABC স্কুল একটি আধুনিক ও প্রগতিশীল শিক্ষা প্রতিষ্ঠান যা শহরের কেন্দ্রস্থলে অবস্থিত। <br>আমরা মানসম্মত শিক্ষা দিয়ে ভবিষ্যতের নেতৃত্ব তৈরিতে কাজ করি।</p>
-    <p>স্কুলে রয়েছে ডিজিটাল ক্লাসরুম, লাইব্রেরি, খেলাধুলার সুযোগ, এবং অভিজ্ঞ শিক্ষকবৃন্দ।</p>
-    <p>আমরা সংস্কৃতি, প্রযুক্তি ও সৃজনশীলতার বিকাশে বিশ্বাস করি।</p>
-  </div>
+<div class="bottom-links">
+  <a href="https://example.com/project1" target="_blank">Project 1</a>
+  <a href="https://example.com/project2" target="_blank">Project 2</a>
+  <a href="https://example.com/project3" target="_blank">Project 3</a>
+</div>
 
-  <div class="buttons">
-    <button onclick="location.href='about.html'">About</button>
-    <button onclick="alert('যোগাযোগ নম্বর: ০১২৩৪৫৬৭৮৯\nইমেইল: abc@school.com')">Contact</button>
-    <button onclick="location.href='result.html'">Result</button>
-  </div>
-
-</body>
+  </div>  <script>
+    function toggleIcons() {
+      const icons = document.getElementById("contactIcons");
+      icons.classList.toggle("show");
+    }
+  </script></body>
 </html>
