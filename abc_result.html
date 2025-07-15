@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-
-<html>
-<head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <title>Abc School Result</title>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
+  <title>ABC School Result</title>
   <style>
-   {
+    body {
       font-family: Arial, sans-serif;
       background-color: #e6f2ff;
       padding: 20px;
@@ -120,7 +115,7 @@
         <th>Bangla</th>
         <th>English</th>
         <th>Math</th>
-        <th>Gobal</th>
+        <th>Global</th>
         <th>Science</th>
         <th>Religion</th>
         <th>Total</th>
@@ -169,7 +164,7 @@
     function calculateResults(data) {
       return data.map(student => {
         const marks = student.Marks;
-        const subjects = ['Math', 'English', 'Science', 'Bangla', 'Religion', 'ICT'];
+        const subjects = ['Bangla', 'English', 'Math', 'Global', 'Science', 'Religion'];
         let total = 0;
         let totalPoint = 0;
         for (let subject of subjects) {
@@ -204,12 +199,12 @@
           <tr>
             <td>${s.Roll}</td>
             <td>${s.Name}</td>
-            <td>${s.Marks.Math}</td>
-            <td>${s.Marks.English}</td>
-            <td>${s.Marks.Science}</td>
-            <td>${s.Marks.Bangla}</td>
-            <td>${s.Marks.Religion}</td>
-            <td>${s.Marks.ICT}</td>
+            <td>${s.Marks.Bangla || 0}</td>
+            <td>${s.Marks.English || 0}</td>
+            <td>${s.Marks.Math || 0}</td>
+            <td>${s.Marks.Global || 0}</td>
+            <td>${s.Marks.Science || 0}</td>
+            <td>${s.Marks.Religion || 0}</td>
             <td>${s.total}</td>
             <td>${s.gpa}</td>
             <td>${s.grade}</td>
@@ -231,6 +226,7 @@
       }
     }
 
+    // Auto load on selection change
     yearSelect.onchange = classSelect.onchange = termSelect.onchange = loadData;
     sortOption.onchange = searchInput.oninput = loadData;
 
