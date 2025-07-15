@@ -1,7 +1,8 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Coder Towhid</title>
   <style>
     * {
@@ -11,16 +12,19 @@
     }
     body {
       font-family: Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.8;
       padding: 20px;
       background-color: #cceeff;
+      color: #333;
     }
     .container {
       max-width: 1000px;
       margin: auto;
       background: #e6f7ff;
       border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px 30px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     }
     .top-section {
       display: flex;
@@ -29,28 +33,40 @@
       flex-wrap: wrap;
     }
     .profile-pic {
-      width: 120px;
-      height: 120px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
       background: url('images/user/profile_picture.jpg') center/cover no-repeat;
       border: 1px solid #444;
+      flex-shrink: 0;
     }
     .info {
+      font-size: 18px;
+      font-weight: bold;
       flex: 1;
+      padding-left: 20px;
+      min-width: 250px;
     }
     .info h2 {
       margin-bottom: 10px;
     }
     .contact-icons {
+      font-weight: bold;
+      font-size: 20px;
+      color: green;
       display: flex;
-      gap: 10px;
-      margin-top: 10px;
+      gap: 12px;
+      margin-top: 12px;
     }
     .contact-icons a {
       text-decoration: none;
       display: inline-block;
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
+      transition: transform 0.3s ease;
+    }
+    .contact-icons a:hover {
+      transform: scale(1.2);
     }
     .contact-icons img {
       width: 100%;
@@ -58,64 +74,143 @@
       object-fit: contain;
     }
     .project-section {
-      margin-top: 30px;
+      margin-top: 40px;
     }
     .project-section h3 {
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      font-size: 2rem;
+      color: #003366;
     }
     .project-section p.description {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #333;
+      text-align: flex-start;
+      margin-bottom: 30px;
+      color: #004080;
+      font-size: 1.2rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0 30px 0;
+    }
+    th, td {
+      text-align: left;
+      font-size: 20px;
+      color: blue;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-bottom: 4px solid #aad4ff;
+      border-top: 4px solid #aad4ff;
+      border-left: 4px solid #aad4ff;
+      border-right: 4px solid #aad4ff;
+    }
+    th {
+      background-color: #b3e6ff;
+      font-size: 1.1rem;
+      color: #003366;
     }
     .project-columns {
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
+      justify-content: center;
     }
     .column {
       flex: 1;
-      min-width: 250px;
+      min-width: 280px;
       background: #d9f0ff;
-      padding: 15px;
-      border-radius: 10px;
+      padding: 25px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+      transition: background-color 0.3s ease;
+    }
+    .column:hover {
+      background-color: #b6dbff;
     }
     .column h4 {
-      margin-bottom: 10px;
-      border-bottom: 2px solid #aaa;
-      padding-bottom: 5px;
+      margin-bottom: 18px;
+      border-bottom: 3px solid #004080;
+      padding-bottom: 10px;
+      font-size: 1.5rem;
+      color: #00264d;
     }
     .column ul {
       padding-left: 20px;
     }
+    .column ul li {
+      font-size: 20px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+      color: #003366;
+      font-weight: 600;
+    }
     .bottom-text {
-      margin-top: 20px;
+      margin-top: 100px;
       font-weight: bold;
       color: #005f73;
+      font-size: 1 rem;
+      text-align: flex-start;
     }
     .bottom-links {
-      margin-top: 10px;
+      margin-top: 25px;
       display: flex;
-      gap: 10px;
+      gap: 50px;
       flex-wrap: wrap;
       justify-content: flex-start;
     }
     .bottom-links a {
-      padding: 10px 20px;
+      padding: 14px 25px;
       background: #0077b6;
       color: white;
-      border-radius: 5px;
+      border-radius: 6px;
       text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
     }
+    .bottom-links a:hover {
+      background-color: #005f73;
+    }
+    .free-text {
+  font-size: 22px;
+  color: #f00;
+}
+    /* Responsive adjustments */
     @media (max-width: 600px) {
       .top-section {
         flex-direction: column-reverse;
         align-items: flex-start;
       }
       .profile-pic {
-        margin-bottom: 20px;
+        margin-bottom: 25px;
+        width: 100px;
+        height: 100px;
       }
+      .info {
+        padding-left: 0;
+      }
+      .project-columns {
+        flex-direction: column;
+      }
+      .column {
+        min-width: 100%;
+        padding: 20px 15px;
+      }
+      .column ul li {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      .project-section h3 {
+        font-size: 1.6rem;
+      }
+      .project-section p.description {
+        font-size: 1rem;
+      }
+      .bottom-links a {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+      
     }
   </style>
 </head>
@@ -123,75 +218,96 @@
   <div class="container">
     <div class="top-section">
       <div class="info">
-        <h2>Name: Md. Towhid</h2>
+        <h2>Md. Towhid</h2>
         <p>Age: 20</p>
         <p>Profession: Student</p>
-        <p>Interested in: Python, Html</p>
-        <div class="contact-icons">
-          <a href="https://www.facebook.com/share/16bc2qLfPn/" target="_blank"><img src="images/icon/facebook.png" alt="Fb"></a>
-          <a href="https://wa.me/8801604647181" target="_blank"><img src="images/icon/whatsapp.png" alt="W.App"></a>
-          <a href="mailto:jrmdtowhid@gmail.com"><img src="images/icon/email.png" alt="@"></a>
+        <p>Interested in: Python, HTML</p>
+        <div class="contact-icons">Contact: 
+          <a href="https://www.facebook.com/share/16bc2qLfPn/" target="_blank" aria-label="Facebook">
+            <img src="images/icon/facebook.png" alt="F" />
+          </a>
+          <a href="https://wa.me/8801604647181" target="_blank" aria-label="WhatsApp">
+            <img src="images/icon/whatsapp.png" alt="W" />
+          </a>
+          <a href="mailto:jrmdtowhid@gmail.com" aria-label="Email">
+            <img src="images/icon/email.png" alt="E" />
+          </a>
         </div>
       </div>
       <div class="profile-pic"></div>
-    </div><div class="project-section">
-      <p><br><br></p>  
-      <h4>Welcome! Im coder Towdid !</h4>
-      <p>Coding is a hobby. But here are some of my interesting codes, which will help you in your regular life.</p>
-      <h3>1st Project</h3>
-      <p><br>Let me introduce you whith my first program- Digital Marksheet!<br>
-        Yes, you are here! You can host your own school website for free! Student can easily find their own result on your website.<br>
-        There are also a 'Teachers Lobby', where stidents can find informatiom about their teachers.
+    </div>
+    <br><hr><hr>
+    <div class="project-section">
+      <h3>Welcome! I'm Coder Towhid!</h3>
+      <p class="description">
+        Coding is my hobby. Here are some of my interesting codes, which can help you in your daily life.
       </p>
-      
-      <h3>Project Detail</h3>
-      <h5>Project: 1<br>
-        Name: Digital marksheet<br><br>
-      </h5>
-  <p class="description">Here are the full details of my program.</p>
-  <div class="project-columns">
-    <div class="column">
-      <h4>Online Broadcast</h4>
-      <ul>
-        <li>Anyone can see result online</li>
-        <li>Search by roll number</li>
-        <li>GPA grade system</li>
-        <li>List by result</li>
-        <li>Update data anytime</li>
-        <li>Simplified help desk</li>
-      </ul>
-    </div>
-    <div class="column">
-      <h4>Offline Management</h4>
-      <ul>
-        <li>Password protect</li>
-        <li>Saved backup locally</li>
-        <li>No worries of data loss</li>
-        <li>Manage data offline</li>
-        <li>Upload whenever you want</li>
-        <li>Easy data handel</li>
-      </ul>
-    </div>
-  </div>
-</div>
-    <p><br><br><br></p>
-    <h3>My future project</h3>
-    <h4>Digital rollcall</h4>
-    <p><br>I'm thinking to create a program that might be helpful to you.<br>
-      The consept is:<br>
-1.Roll call with program<br>
-2.Send text to home if absent<br>
-3.Digital prit of attendence <br><br><br>   </p>
-    <p>Fell free to share your throught. You can contact me <a herf="contact.html">here</a>.</p>
-<div class="bottom-text">
-  নিচে আমার কিছু গুরুত্বপূর্ণ প্রজেক্টের লিংক দেওয়া হলো:
-</div>
-<div class="bottom-links">
-  <a href="abc_result.html" target="_blank">Project 1</a>
-  <a href="https://example.com/project2" target="_blank">Project 2</a>
-  <a href="https://example.com/project3" target="_blank">Project 3</a>
-</div>
 
+      <h3>1st Project</h3>
+      <p>
+        Let me introduce you to my first program — Digital Marksheet!<br /></p>
+      <p class="free-text">It's Free!</p>
+      <p> Yes, you are here! You can host your own school website for free!<br />
+        Students can easily find their results, and there's also a 'Teachers Lobby' where students can find information about their teachers.
+      </p>
+
+      <h3>Project Details</h3>
+      <table>
+        <th>Number</th><th>Project name</th>
+        <tr> <td>1</td> <td>Digital Marksheet</td> </tr>
+        <tr> <td>2</td> <td>Digital Roll-call</td> </tr>   
+      </table>
+
+      <p class="description">Here are the full details of my program:</p>
+
+      <div class="project-columns">
+        <div class="column">
+          <h4>Online Broadcast</h4>
+          <ul>
+            <li>Anyone can see results online</li>
+            <li>Search by roll number</li>
+            <li>GPA grade system</li>
+            <li>List by result</li>
+            <li>Update data anytime</li>
+            <li>Simplified help desk</li>
+          </ul>
+        </div>
+        <div class="column">
+          <h4>Offline Management</h4>
+          <ul>
+            <li>Password protection</li>
+            <li>Saved backup locally</li>
+            <li>No worry of data loss</li>
+            <li>Manage data offline</li>
+            <li>Upload whenever you want</li>
+            <li>Easy data handling</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3><br><br>My Future Project</h3>
+      <h4>Digital Roll Call</h4>
+      <p>
+        I'm planning to create a program that might be useful for you.<br />
+        The concept is:<br/>
+        1. Roll call with a program<br />
+        2. Send a text to home if absent<br/>
+        3. Digital print of attendance
+      </p>
+
+      <p><br>
+        Feel free to share your thoughts. If you need any help or suppot click <a href="waiting_page.html">here</a>.
+      </p>
+
+      <div class="bottom-text">
+        নিচে আমার কিছু গুরুত্বপূর্ণ প্রজেক্টের লিংক দেওয়া হলো:
+      </div>
+      <div class="bottom-links">
+        <a href="abc_result.html" target="_blank">Project 1</a>
+        <a href="waiting_page.html" target="_blank">Project 2</a>
+        <a href="waiting_page.html" target="_blank">Project 3</a>
+      </div>
+    </div>
   </div>
 </body>
 </html>
