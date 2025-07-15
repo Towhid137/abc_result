@@ -1,0 +1,26 @@
+[
+    {
+        "Roll": "1",
+        "Name": "Sakib",
+        "Marks": {
+            "Bangla": 78,
+            "English": 76,
+            "Math": 58,
+            "Social": 97,
+            "Science": 67,
+            "Religion": 78
+        }
+    },
+    {
+        "Roll": "2",
+        "Name": "Samim",
+        "Marks": {
+            "Bangla": 87,
+            "English": 78,
+            "Math": 98,
+            "Social": 78,
+            "Science": 67,
+            "Religion": 68
+        }
+    }
+]

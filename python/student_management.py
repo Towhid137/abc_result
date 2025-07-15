@@ -122,6 +122,7 @@ def get_result_filepath():
     return filepath
 
 def add_student():
+    clear_screen()
     printx("📥 Add New Student\n")
     with open(result_file, 'r') as f:
         pre_data = json.load(f)
@@ -157,9 +158,10 @@ def add_student():
         json.dump(pre_data, f, indent=4)
     printx("✅ Student added successfully!")
     time.sleep(1)
-    main_menu()
+    add_student()
 
 def modify_data():
+    clear_screen()
     printx("✏️ Modify Student Info\n")
     mod_roll = input("🎯 Enter roll number: ").strip()
     with open(result_file, 'r') as f:
@@ -196,6 +198,7 @@ def modify_data():
     main_menu()
 
 def delete_data():
+    clear_screen()
     verify_pass()
     confirm = input("🗑️ Delete all data? (y/n): ").strip().lower()
     if confirm == "y":
@@ -206,6 +209,7 @@ def delete_data():
     main_menu()
 
 def st_manager():
+    clear_screen()
     printx("📚 Student Management")
     print("\n1. ➕ Add student\n2. ✏️ Modify student\n3. 🗑️ Delete all data\n\nEnter = Main menu")
     choice = input("🔢 Choice: ").strip()
@@ -222,6 +226,7 @@ def st_manager():
         main_menu()
 
 def all_result():
+    clear_screen()
     with open(result_file, 'r') as f:
         data = json.load(f)
     data.sort(key=lambda x: x['Roll'])
@@ -235,6 +240,7 @@ def all_result():
     main_menu()
 
 def view_by_roll():
+    clear_screen()
     search_roll = input("🎯 Enter roll: ").strip()
     with open(result_file, 'r') as f:
         data = json.load(f)
@@ -253,6 +259,7 @@ def view_by_roll():
     main_menu()
 
 def view_results():
+    clear_screen()
     printx("📄 Result Management")
     print("\n1. 📋 View all\n2. 🔍 Search by roll\n\nEnter = Main menu")
     choice = input("🔢 Choice: ").strip()
@@ -301,6 +308,7 @@ def set_password():
         print("✅ Password changed.")
 
 def pass_manager():
+    clear_screen()
     with open(save_password, 'r') as f:
         data = json.load(f)
     if data == []:
