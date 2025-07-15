@@ -1,71 +1,240 @@
 <!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>Abc School Result</title>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Student Result</title>
+
   <style>
-    body {
+   {
       font-family: Arial, sans-serif;
-      background: #f4f6f9;
+      background-color: #e6f2ff;
       padding: 20px;
     }
+
     h1 {
       text-align: center;
+      color: #003366;
+      margin-bottom: 20px;
     }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .dropdowns, .search-sort {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    select, input {
+      padding: 8px;
+      font-size: 16px;
+    }
+
     table {
-      width: 80%;
-      margin: 20px auto;
+      width: 100%;
       border-collapse: collapse;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      background: #fff;
+      background: white;
+      margin-top: 10px;
     }
+
     th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
+      border: 1px solid #ccc;
+      padding: 8px;
       text-align: center;
+      font-size: 14px;
     }
+
     th {
-      background: #007BFF;
-      color: white;
+      background-color: #b3d9ff;
     }
+
     tr:nth-child(even) {
-      background: #f9f9f9;
+      background-color: #f2f9ff;
+    }
+
+    .search-box {
+      flex-grow: 1;
+    }
+
+    .sort-select {
+      min-width: 150px;
     }
   </style>
 </head>
 <body>
-
   <h1>ABC School - Student Result</h1>
+
+  <div class="controls">
+    <div class="dropdowns">
+      <label>Year:
+        <select id="year">
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+          <option value="2027">2027</option>
+        </select>
+      </label>
+      <label>Class:
+        <select id="class">
+          <option value="1">Class 1</option>
+          <option value="2">Class 2</option>
+          <option value="3">Class 3</option>
+          <option value="4">Class 4</option>
+          <option value="5">Class 5</option>
+        </select>
+      </label>
+      <label>Term:
+        <select id="term">
+          <option value="1">Term 1</option>
+          <option value="2">Term 2</option>
+          <option value="3">Term 3</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="search-sort">
+      <input class="search-box" type="text" id="searchInput" placeholder="Enter name or roll">
+      <select class="sort-select" id="sortOption">
+        <option value="gpa">Sort by GPA</option>
+        <option value="total">Sort by Total Marks</option>
+        <option value="roll">Sort by Roll</option>
+      </select>
+    </div>
+  </div>
+
   <table id="resultTable">
     <thead>
       <tr>
         <th>Roll</th>
         <th>Name</th>
+        <th>Bangla</th>
+        <th>English</th>
+        <th>Math</th>
+        <th>Gobal</th>
+        <th>Science</th>
+        <th>Religion</th>
+        <th>Total</th>
+        <th>GPA</th>
+        <th>Grade</th>
       </tr>
     </thead>
-    <tbody>
-      <!-- Data will be inserted here -->
-    </tbody>
+    <tbody></tbody>
   </table>
 
   <script>
-    // Load JSON from file
-    fetch('result.json')
-      .then(response => response.json())
-      .then(data => {
-        const tbody = document.querySelector("#resultTable tbody");
+    const yearSelect = document.getElementById('year');
+    const classSelect = document.getElementById('class');
+    const termSelect = document.getElementById('term');
+    const searchInput = document.getElementById('searchInput');
+    const sortOption = document.getElementById('sortOption');
+    const tableBody = document.querySelector('#resultTable tbody');
 
-        data.forEach(student => {
-          const row = document.createElement("tr");
-          row.innerHTML = `<td>${student.Roll}</td><td>${student.Name}</td>`;
-          tbody.appendChild(row);
-        });
-      })
-      .catch(error => {
-        console.error("Error loading result.json:", error);
-        document.querySelector("body").innerHTML += "<p style='text-align:center;color:red;'>Could not load results.</p>";
+    function getFileURL() {
+      const year = yearSelect.value;
+      const cls = classSelect.value;
+      const term = termSelect.value;
+      return `https://towhid137.github.io/abc_result/_results/${year}/class_${cls}/term_${term}.json`;
+    }
+
+    function getPoint(mark) {
+      if (mark >= 80) return 5.00;
+      if (mark >= 70) return 4.00;
+      if (mark >= 60) return 3.50;
+      if (mark >= 50) return 3.00;
+      if (mark >= 40) return 2.00;
+      if (mark >= 33) return 1.00;
+      return 0.00;
+    }
+
+    function getGrade(gpa) {
+      if (gpa === 5.00) return 'A+';
+      if (gpa >= 4.00) return 'A';
+      if (gpa >= 3.50) return 'A-';
+      if (gpa >= 3.00) return 'B';
+      if (gpa >= 2.00) return 'C';
+      if (gpa >= 1.00) return 'D';
+      return 'F';
+    }
+
+    function calculateResults(data) {
+      return data.map(student => {
+        const marks = student.Marks;
+        const subjects = ['Math', 'English', 'Science', 'Bangla', 'Religion', 'ICT'];
+        let total = 0;
+        let totalPoint = 0;
+        for (let subject of subjects) {
+          const mark = marks[subject] || 0;
+          total += mark;
+          totalPoint += getPoint(mark);
+        }
+        const gpa = +(totalPoint / 6).toFixed(2);
+        const grade = getGrade(gpa);
+        return { ...student, total, gpa, grade };
       });
-  </script>
+    }
 
+    function renderTable(data) {
+      tableBody.innerHTML = '';
+      const query = searchInput.value.trim().toLowerCase();
+      let filtered = data.filter(s =>
+        s.Roll.toString().includes(query) || s.Name.toLowerCase().includes(query)
+      );
+
+      const sortBy = sortOption.value;
+      if (sortBy === 'gpa') {
+        filtered.sort((a, b) => b.gpa - a.gpa || b.total - a.total);
+      } else if (sortBy === 'total') {
+        filtered.sort((a, b) => b.total - a.total);
+      } else {
+        filtered.sort((a, b) => parseInt(a.Roll) - parseInt(b.Roll));
+      }
+
+      for (let s of filtered) {
+        const row = `
+          <tr>
+            <td>${s.Roll}</td>
+            <td>${s.Name}</td>
+            <td>${s.Marks.Math}</td>
+            <td>${s.Marks.English}</td>
+            <td>${s.Marks.Science}</td>
+            <td>${s.Marks.Bangla}</td>
+            <td>${s.Marks.Religion}</td>
+            <td>${s.Marks.ICT}</td>
+            <td>${s.total}</td>
+            <td>${s.gpa}</td>
+            <td>${s.grade}</td>
+          </tr>
+        `;
+        tableBody.innerHTML += row;
+      }
+    }
+
+    async function loadData() {
+      const url = getFileURL();
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        const processed = calculateResults(data);
+        renderTable(processed);
+      } catch (e) {
+        tableBody.innerHTML = `<tr><td colspan="11">Result file not found.</td></tr>`;
+      }
+    }
+
+    yearSelect.onchange = classSelect.onchange = termSelect.onchange = loadData;
+    sortOption.onchange = searchInput.oninput = loadData;
+
+    loadData(); // Initial load
+  </script>
 </body>
 </html>
