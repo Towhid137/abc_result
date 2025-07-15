@@ -22,5 +22,17 @@
             "Science": 67,
             "Religion": 68
         }
+    },
+    {
+        "Roll": "3",
+        "Name": "Akib",
+        "Marks": {
+            "Bangla": 87,
+            "English": 87,
+            "Math": 98,
+            "Social": 58,
+            "Science": 97,
+            "Religion": 67
+        }
     }
 ]
