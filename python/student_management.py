@@ -128,8 +128,8 @@ def add_student():
 	while True:
 		with open(result_file, 'r') as f:
 			pre_data = json.load(f)
-
-		new_roll = input("🎯 Enter new student roll (or type 'exit' to return): ").strip()
+		print(f"Type 'exit' anytime to return\n\n")
+		new_roll = input("🎯 Enter new student roll: ").strip()
 		if new_roll.lower() == 'exit':
 			main_menu()
 			return
@@ -138,14 +138,18 @@ def add_student():
 		duplicate = False
 		for x in pre_data:
 			if new_roll == x['Roll']:
+				clear_screen()
 				printx("⚠️ Roll already exists.")
-				print(f'Roll: {x["Roll"]}, Name: {x["Name"]}')
+				print(f'\nRoll: {x["Roll"]}\nName: {x["Name"]}')
 				duplicate = True
 				break
 		if duplicate:
 			continue
 
 		new_name = input("🧑 Enter student name: ").strip()
+		if new_name.lower() == 'exit':
+			main_menu()
+		
 		marks = {}
 		subjects = ["Bangla", "English", "Math", "Social", "Science", "Religion"]
 		for subject in subjects:
@@ -169,7 +173,9 @@ def add_student():
 		with open(result_file, 'w') as f:
 			json.dump(pre_data, f, indent=4)
 		printx("✅ Student added successfully!")
-		print("➕ Add another or type 'exit' next time to return.\n")
+		time.sleep(0.5)
+		clear_screen()
+		print("➕ Add another student\n")
 
 def modify_data():
 	clear_screen()
@@ -180,7 +186,7 @@ def modify_data():
 
 	for x in mod_data:
 		if mod_roll == x["Roll"]:
-			print(f'Roll: {x["Roll"]}, Current Name: {x["Name"]}')
+			print(f'\nRoll: {x["Roll"]}\nCurrent Name: {x["Name"]}\n')
 			new_name = input("🔤 New name (leave blank to keep): ").strip()
 			if new_name:
 				x["Name"] = new_name
@@ -222,7 +228,7 @@ def delete_data():
 def st_manager():
 	clear_screen()
 	printx("📚 Student Management")
-	print("\n1. ➕ Add student\n2. ✏️ Modify student\n3. 🗑️ Delete all data\n\nEnter = Main menu")
+	print("\n1. ➕ Add student\n2. ✏️ Modify student\n3. 🗑️ Delete all data\n\nEnter = Main menu\n\n")
 	choice = input("🔢 Choice: ").strip()
 	if choice == "1":
 		clear_screen()
@@ -272,7 +278,7 @@ def view_by_roll():
 def view_results():
 	clear_screen()
 	printx("📄 Result Management")
-	print("\n1. 📋 View all\n2. 🔍 Search by roll\n\nEnter = Main menu")
+	print("\n1. 📋 View all\n2. 🔍 Search by roll\n\nEnter = Main menu\n")
 	choice = input("🔢 Choice: ").strip()
 	if choice == "1":
 		all_result()
@@ -323,11 +329,14 @@ def pass_manager():
 	with open(save_password, 'r') as f:
 		data = json.load(f)
 	if data == []:
-		print("\n1. 🔐 Set Password\n")
+		print("\n1. 🔐 Set Password\n\n🔙Enter to main menu\n")
 	else:
-		print("\n1. 🔁 Change Password\n2. ❌ Remove Password\n")
+		print("\n1. 🔁 Change Password\n2. ❌ Remove Password\n\3. 🔙Enter to return\n")
 	choice = input("🔢 Choice: ").strip()
-	if choice == "1":
+	if choice == "":
+		main_menu()
+	
+	elif choice == "1":
 		set_password()
 	elif choice == "2" and data:
 		verify_pass()
