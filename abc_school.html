@@ -1,22 +1,76 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ABC School</title>
   <style>
-    body {
-      font-family: 'SolaimanLipi', sans-serif;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+    body {
+      font-family: 'SolaimanLipi', sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    /* Navigation Bar */
+    nav {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      background-color: #204040;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav li {
+  margin-right: 200px; /* প্রতিটি option এর ডানে ৩০px ফাঁকা থাকবে */
+   }
+
+     nav li:last-child {
+  margin-right: 0; /* শেষটার পাশে আর ফাঁকা থাকবে না */
+   }
+  
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 6px 12px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      background-color: #2f6e6e;
+    }
+
     .header {
       text-align: center;
-      padding: 20px;
-      font-size: 30px;
+      padding: 30px 10px 10px;
+      font-size: 28px;
       font-weight: bold;
       color: darkred;
     }
-    .owner-info {
+
+    /* Typing Text */
+    #typing-text {
+      text-align: center;
+      font-size: 22px;
+      color: #007777;
+      margin-bottom: 10px;
+      min-height: 30px;
+    }
+
+    /* Owner Info Section */
+    
+     .owner-info {
       padding: 20px;
       display: flex;
       justify-content: space-between;
@@ -35,49 +89,133 @@
       height: 100%;
       object-fit: cover;
     }
+
+    /* Description Section with Fade-in */
     .description {
       background: url('images/default/school.jpeg') no-repeat center center;
       background-size: cover;
-      padding: 40px;
+      padding: 40px 20px;
       color: white;
     }
     .description p {
       font-size: 18px;
       line-height: 1.6;
       background-color: rgba(0, 0, 0, 0.5);
-      padding: 10px;
+      padding: 12px;
       border-radius: 10px;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 0.8s ease;
     }
-    .buttons {
-      display: flex;
-      justify-content: space-around;
-      padding: 20px;
+    .description p.show {
+      opacity: 1;
+      transform: translateY(0);
     }
-    .buttons button {
-      padding: 12px 25px;
-      font-size: 16px;
+
+    /* Floating Result Button */
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
       background-color: #008CBA;
       color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
+      font-size: 20px;
+      padding: 0px 0px;
+      border-radius: 50%;
+      text-decoration: none;
+      box-shadow: 0 0px 0px rgba(0,0,0,0.3);
+      z-index: 999;
+      transition: 0.3s;
     }
-    .buttons button:hover {
+    .floating-btn:hover {
       background-color: #005f6a;
     }
-  footer {
-      background: #204040;
+
+    /* Footer */
+    footer {
+      background-color: #204040;
       color: white;
       text-align: center;
-      padding: 10px;
+      padding: 12px;
       font-size: 0.9em;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      background-color: #204040;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav li {
+  margin-right: 20px; /* প্রতিটি option এর ডানে ৩০px ফাঁকা থাকবে */
+   }
+
+     nav li:last-child {
+  margin-right: 0; /* শেষটার পাশে আর ফাঁকা থাকবে না */
+   }
+  
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 6px 12px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      background-color: #2f6e6e;
+    }
+       .owner-info {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .profile-photo {
+      width: 120px;
+      height: 120px;
+      border: 3px solid #d0f045;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-left: auto;
+    }
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+      
     }
   </style>
 </head>
 <body>
-
+  
   <div class="header">ABC স্কুল</div>
+  <!-- Navigation Menu -->
+   <nav>
+    <ul>
+      <li><a href="abc_teachers.html">শিক্ষকবৃন্দ</a></li>
+      <li><a href="abc_result.html">রেজাল্ট</a></li>
+      <li><a href="contact.html">যোগাযোগ</a></li>
+    </ul>
+  </nav>
 
+  <!-- Typing text -->
+  <div id="typing-text"></div>
+
+  <!-- Owner Info -->
   <div class="owner-info">
     <div>
       <p><strong>প্রতিষ্ঠাতার তথ্য:</strong></p>
@@ -86,26 +224,54 @@
       <p>পদবি: প্রধান শিক্ষক</p>
     </div>
     <div class="profile-photo">
-      <img src="images/default/school_logo.jpeg" alt="প্রোফাইল ছবি">
+      <img src="images/default/school_logo.png" alt="প্রোফাইল ছবি">
     </div>
   </div>
 
+  <!-- Description with Fade-in Paragraphs -->
   <div class="description">
-    <p><strong>বর্ণনা:</strong></p>
-    <p>ABC স্কুল একটি আধুনিক ও প্রগতিশীল শিক্ষা প্রতিষ্ঠান যা শহরের কেন্দ্রস্থলে অবস্থিত। <br>আমরা মানসম্মত শিক্ষা দিয়ে ভবিষ্যতের নেতৃত্ব তৈরিতে কাজ করি।</p>
-    <p>স্কুলে রয়েছে ডিজিটাল ক্লাসরুম, লাইব্রেরি, খেলাধুলার সুযোগ, এবং অভিজ্ঞ শিক্ষকবৃন্দ।</p>
-    <p>আমরা সংস্কৃতি, প্রযুক্তি ও সৃজনশীলতার বিকাশে বিশ্বাস করি।</p>
+    <p class="fade">ABC স্কুল একটি আধুনিক ও প্রগতিশীল শিক্ষা প্রতিষ্ঠান যা শহরের কেন্দ্রস্থলে অবস্থিত। আমরা মানসম্মত শিক্ষা দিয়ে ভবিষ্যতের নেতৃত্ব তৈরিতে কাজ করি।</p>
+    <p class="fade">স্কুলে রয়েছে ডিজিটাল ক্লাসরুম, লাইব্রেরি, খেলাধুলার সুযোগ, এবং অভিজ্ঞ শিক্ষকবৃন্দ।</p>
+    <p class="fade">আমরা সংস্কৃতি, প্রযুক্তি ও সৃজনশীলতার বিকাশে বিশ্বাস করি।</p>
   </div>
 
-  <div class="buttons">
-    <button onclick="location.href='abc_teachers.html'">About Teachers</button>
-    <button onclick="alert('যোগাযোগ নম্বর: ০১২৩৪৫৬৭৮৯\nইমেইল: abc@school.com')">Contact</button>
-    <button onclick="location.href='abc_result.html'">Result</button>
-  </div>
-
+  <!-- Floating Button -->
+<a href="http://towhid137.github.io" class="floating-btn">
+  <img src="images/default/home_logo.png" alt="H" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden;">
+</a>
+  <!-- Footer -->
   <footer>
     &copy; 2025 ABC School | সর্বস্বত্ব সংরক্ষিত
   </footer>
-  
+
+  <!-- Typing Effect JS -->
+  <script>
+    const text = "Welcome to ABC School!";
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typing-text").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 30);
+      }
+    }
+    window.onload = typeWriter;
+  </script>
+
+  <!-- Fade-in Animation JS -->
+  <script>
+    const fadeElements = document.querySelectorAll(".fade");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target); // observe only once
+        }
+      });
+    }, { threshold: 0.2 });
+
+    fadeElements.forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>
