@@ -1,0 +1,50 @@
+[
+    {
+        "Roll": "1",
+        "Name": "Sakib",
+        "Marks": {
+            "Bangla": 78,
+            "English": 98,
+            "Math": 87,
+            "Social": 86,
+            "Science": 76,
+            "Religion": 79
+        }
+    },
+    {
+        "Roll": "2",
+        "Name": "79",
+        "Marks": {
+            "Bangla": 89,
+            "English": 87,
+            "Math": 83,
+            "Social": 85,
+            "Science": 73,
+            "Religion": 79
+        }
+    },
+    {
+        "Roll": "3",
+        "Name": "Arefin",
+        "Marks": {
+            "Bangla": 78,
+            "English": 38,
+            "Math": 75,
+            "Social": 78,
+            "Science": 64,
+            "Religion": 89
+        }
+    },
+    {
+        "Roll": "4",
+        "Name": "548",
+        "Marks": {
+            "Bangla": 78,
+            "English": 53,
+            "Math": 67,
+            "Social": 78,
+            "Science": 87,
+            "Religion": 78
+        }
+    }
+]
