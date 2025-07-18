@@ -3,8 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>ABC School Result</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -66,26 +64,6 @@
     .sort-select {
       min-width: 150px;
     }
-
-    button {
-      padding: 6px 12px;
-      font-size: 14px;
-      margin: 5px 2px;
-      background-color: #0073e6;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #005bb5;
-    }
-
-    .download-section {
-      text-align: center;
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
@@ -143,15 +121,10 @@
         <th>Total</th>
         <th>GPA</th>
         <th>Grade</th>
-        <th>Action</th>
       </tr>
     </thead>
     <tbody></tbody>
   </table>
-
-  <div class="download-section">
-    <button onclick="downloadFullPDF()">⬇️ Download Full Result PDF</button>
-  </div>
 
   <script>
     const yearSelect = document.getElementById('year');
@@ -161,13 +134,11 @@
     const sortOption = document.getElementById('sortOption');
     const tableBody = document.querySelector('#resultTable tbody');
 
-    let allStudents = [];
-
     function getFileURL() {
       const year = yearSelect.value;
       const cls = classSelect.value;
       const term = termSelect.value;
-      return `https://raw.githubusercontent.com/towhid137/abc_result/main/_results/${year}/class_${cls}.json`;
+      return `https://raw.githubusercontent.com/towhid137/abc_result/main/_results/${year}/class_${cls}/term_${term}.json`;
     }
 
     function getPoint(mark) {
@@ -237,7 +208,6 @@
             <td>${s.total}</td>
             <td>${s.gpa}</td>
             <td>${s.grade}</td>
-            <td><button onclick='downloadPDF(${JSON.stringify(s).replace(/'/g, "\\'")})'>PDF</button></td>
           </tr>
         `;
         tableBody.innerHTML += row;
@@ -250,79 +220,17 @@
         const res = await fetch(url);
         const data = await res.json();
         const processed = calculateResults(data);
-        allStudents = processed;
         renderTable(processed);
       } catch (e) {
-        tableBody.innerHTML = `<tr><td colspan="12">Result file not found.</td></tr>`;
-        allStudents = [];
+        tableBody.innerHTML = `<tr><td colspan="11">Result file not found.</td></tr>`;
       }
     }
 
-    async function downloadPDF(student) {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      doc.setFontSize(16);
-      doc.text("ABC School - Student Result", 20, 20);
-      doc.setFontSize(12);
-      const rows = [
-        ["Roll", student.Roll],
-        ["Name", student.Name],
-        ["Bangla", student.Marks.Bangla || 0],
-        ["English", student.Marks.English || 0],
-        ["Math", student.Marks.Math || 0],
-        ["Global", student.Marks.Global || 0],
-        ["Science", student.Marks.Science || 0],
-        ["Religion", student.Marks.Religion || 0],
-        ["Total", student.total],
-        ["GPA", student.gpa],
-        ["Grade", student.grade]
-      ];
-      let y = 30;
-      rows.forEach(row => {
-        doc.text(`${row[0]}: ${row[1]}`, 20, y);
-        y += 8;
-      });
-      doc.save(`${student.Roll}_${student.Name}_result.pdf`);
-    }
-
-    async function downloadFullPDF() {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF('l'); // landscape mode
-      doc.setFontSize(14);
-      doc.text("ABC School - Full Result Sheet", 14, 15);
-
-      const headers = [["Roll", "Name", "Bangla", "English", "Math", "Global", "Science", "Religion", "Total", "GPA", "Grade"]];
-      const body = allStudents.map(s => [
-        s.Roll,
-        s.Name,
-        s.Marks.Bangla || 0,
-        s.Marks.English || 0,
-        s.Marks.Math || 0,
-        s.Marks.Global || 0,
-        s.Marks.Science || 0,
-        s.Marks.Religion || 0,
-        s.total,
-        s.gpa,
-        s.grade
-      ]);
-
-      doc.autoTable({
-        head: headers,
-        body: body,
-        startY: 20,
-        theme: 'grid',
-        headStyles: { fillColor: [0, 112, 192] }
-      });
-
-      const y = yearSelect.value;
-      const c = classSelect.value;
-      const t = termSelect.value;
-      doc.save(`result_${y}_class${c}_term${t}.pdf`);
-    }
-
+    // Auto load on selection change
     yearSelect.onchange = classSelect.onchange = termSelect.onchange = loadData;
     sortOption.onchange = searchInput.oninput = loadData;
-    loadData();
+
+    loadData(); // Initial load
   </script>
 </body>
 </html>

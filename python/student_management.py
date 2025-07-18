@@ -8,16 +8,22 @@ import calendar
 # 🔖 Config folder
 # OS অনুযায়ী storage path ঠিক করা
 if os.name == 'nt':  # Windows
-	Folder = os.path.join(os.getenv('USERPROFILE'), "student_data")
+#   Folder = os.path.join(os.getenv('USERPROFILE'), "abc_result")
+	Folder = os.path.join(os.path.join(os.environ['USERPROFILE'], 'Desktop'), "abc_result")
 else:
 	Folder = "/storage/emulated/0/abc_result"
 
 # Folder তৈরি (exist না থাকলে)
 if not os.path.exists(Folder):
 	os.makedirs(Folder)
+	
+full_path = os.path.join(Folder, "python")
+if not os.path.exists(full_path):
+	os.makedirs(full_path)
 
-config_path = os.path.join(Folder, "python", "config.json")
-save_password = os.path.join(Folder, "python", "pass_file.json")
+config_path = os.path.join(full_path, "config.json")
+save_password = os.path.join(full_path, "pass_file.json")
+attempt_password = os.path.join(full_path, "attempt.json")
 
 # 🗂️ Ensure folder exists
 if not os.path.exists(Folder):
@@ -31,6 +37,10 @@ if not os.path.exists(config_path):
 if not os.path.exists(save_password):
 	with open(save_password, 'w') as f:
 		json.dump([], f)
+
+if not os.path.exists(attempt_password):
+	with open(attempt_password, 'w') as f:
+		json.dump([{"attempt": 10}], f, indent= 4)
 
 result_file = ""
 current_class = ""
@@ -292,14 +302,31 @@ def verify_pass():
 		users = json.load(f)
 	if users == []:
 		return
+	with open (attempt_password, 'r') as f:
+		atmpt = json.load(f)
+		for x in atmpt:
+			Y=x["attempt"]
 	user = users[0]
-	for i in range(4, 0, -1):
+	while Y > 0 :
 		print(f"🔒 Password for {user['Username']}:")
 		if getpass.getpass() == user["Password"]:
+			with open(attempt_password, 'w') as f:
+				json.dump([{"attempt": 10}], f, indent= 4)
 			return
 		else:
-			print(f"❌ Wrong! {i-1} attempts left.")
-	print("🔐 Too many tries!")
+			with open (attempt_password, 'r') as f:
+				atmpt = json.load(f)
+			for x in atmpt:
+				Y -=1
+				clear_screen()
+				printx(f"❌ Wrong! {Y} attempts left.")
+				with open(attempt_password, 'w') as f:
+					json.dump([{"attempt": Y}], f, indent= 4)
+	
+	
+	print("🔐 Too many tries!\n\n")
+	printx("Program has been locked 🔒\nContact developer 📞", 0.08)
+	time.sleep(3)
 	sys.exit()
 
 def set_password():
@@ -363,7 +390,7 @@ def main_menu():
 	if conf and "class" in conf and "term" in conf and "year" in conf:
 		loc = f"(📚 Class {conf['class']}, 📝 {conf['term']}, 📅 {conf['year']})"
 	printx(f"	🏫 ABC School\n{loc}\n", 0.03)
-	print("1. 👨‍🎓 Student Management\n2. 📄 Result Management\n3. 🔐 Password Manager\n4. 🔁 Change Student File\n5. ❎ Exit\n")
+	print("1. 👨‍🎓 Student Management\n2. 📄 Show Results\n3. 🔐 Password Manager\n4. 🔁 Change Student File\n5. ❎ Exit\n")
 	a = input("🔢 Enter choice: ").strip()
 	if a == "1":
 		st_manager()
